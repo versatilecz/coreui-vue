@@ -4,13 +4,15 @@
     :mobile="mobile"
     :class="classList"
     type="button"
-    @click="asideToggle">
+    @click="asideToggle"
+  >
     <span class="navbar-toggler-icon" />
   </button>
 </template>
 
 <script>
 import { asideMenuCssClasses, validBreakpoints, checkBreakpoint } from '../../shared/classes'
+import presentClass from '../../shared/present-class'
 import toggleClasses from '../../shared/toggle-classes'
 
 export default {
@@ -47,6 +49,7 @@ export default {
         cssClass = `aside-menu-${display}-show`
       }
       toggleClasses(cssClass, asideMenuCssClasses, force)
+      this.$emit('toggle', typeof force === 'boolean' ? force : presentClass(cssClass))
     },
     asideToggle (e) {
       e.preventDefault()
